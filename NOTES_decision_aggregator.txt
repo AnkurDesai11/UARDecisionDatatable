@@ -1,0 +1,21 @@
+To get started run the following SQL commands:
+
+CREATE DATABASE db_dcsn_agreg;
+GRANT ALL ON db_dcsn_agreg.* TO 'fred'@'localhost' IDENTIFIED BY 'zap';
+GRANT ALL ON db_dcsn_agreg.* TO 'fred'@'127.0.0.1' IDENTIFIED BY 'zap';
+
+USE misc; (Or select misc in phpMyAdmin)
+
+CREATE TABLE users (
+   user_id INTEGER NOT NULL
+     AUTO_INCREMENT KEY,
+   name VARCHAR(128),
+   email VARCHAR(128),
+   password VARCHAR(128),
+   INDEX(email)
+) ENGINE=InnoDB CHARSET=utf8;
+
+INSERT INTO users (name,email,password) VALUES ('test1','test1@abd.edu','123');
+INSERT INTO users (name,email,password) VALUES ('tester2','tester2@abd.edu','456');
+INSERT INTO users (name,email,password) VALUES ('testing3','testing3@abd.edu','123');
+INSERT INTO users (name,email,password) VALUES ('tested4','tested4@abd.edu','456');
