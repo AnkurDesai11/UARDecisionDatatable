@@ -17,6 +17,7 @@ if ( isset($_POST['email']) && isset($_POST['pass']) ) {
         return;
     } else { 
         $_SESSION['success'] = "Login success";
+        $_SESSION['email'] = $_POST['email'];
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['name'] = $row['name'];
         error_log("Login successful");
