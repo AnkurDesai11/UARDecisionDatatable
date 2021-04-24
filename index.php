@@ -13,7 +13,7 @@ if ( isset($_POST['email']) && isset($_POST['pass']) ) {
     if ( $row === FALSE ) {
         $_SESSION['error'] = "Invalid Email and Password combination";
         error_log("Login failed as password is incorrect for ".$_POST['email']);
-        header("Location: login.php");
+        header("Location: index.php");
         return;
     } else { 
         $_SESSION['success'] = "Login success";
