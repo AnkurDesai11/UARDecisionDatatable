@@ -20,7 +20,7 @@ if ( isset($_POST['email']) && isset($_POST['pass']) ) {
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['name'] = $row['name'];
         error_log("Login successful");
-        header("Location: enter.php");
+        header("Location: enterDecision.php");
         return;
     }
     //}
