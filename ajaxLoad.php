@@ -16,7 +16,7 @@ else{
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-//console.log($rows);
-echo(json_encode($rows));
+console.log(json_encode($rows, JSON_NUMERIC_CHECK));
+echo(json_encode($rows, JSON_NUMERIC_CHECK));
 
 ?>

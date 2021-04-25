@@ -22,15 +22,15 @@ if ( ! isset($_SESSION['email'] ) ) {
 </head>
 <body>
 
-    <div id="datatable" ></div>
+    <div id="datatable"></div>
 
     <script type="text/javascript">
 
         var idArray = new Array();
 
         var table = new Tabulator("#datatable", {
-            height: 500,
-            //data: tabledata,
+            //height: 500,
+            ajaxURL:"ajaxLoad.php?decision=1",
             layout: "fitColumns",
             placeholder:"No Data Set",
             columns: [
@@ -46,15 +46,19 @@ if ( ! isset($_SESSION['email'] ) ) {
 
             cellEdited: function (cell) {
             // This callback is called any time a cell is edited.
-            var datax = cell.getData();
-            var mynotes = datax.mynotes;
-            var ffsv = datax.ffsv;
-            var orgid = datax.orgid;
-            var fields = cell.getField();
+            var val = cell.getData();
+            var dif;
+            if( cell.getField() == "accessdecision"){
+                dif = "ad"
+            }
+            else{
+                dif = "com"
+            }
+
             $.ajax({
 
                 url: 'ajaxEdit.php',
-                data: { 'orgid': orgid, 'mynotes': mynotes, 'ffsv': ffsv, 'fieldn': fields },
+                data: { 'dif': dif, 'val': val, 'id': cell.getIndex() },
                 type: 'post'
 
                 })
@@ -63,17 +67,12 @@ if ( ! isset($_SESSION['email'] ) ) {
             dataFiltered:function(filters, rows){
                 //filters - array of filters currently applied
                 //rows - array of row components that pass the filters
-
+                idArray = new Array();
+                idArray = rows.map(i => i.id);
             },
 
         });
 
-        $(document).ready(function() {
-            table.setData("ajaxLoad.php?decision=1");
-        });
-
-
-        
 
     <script>
 </body>

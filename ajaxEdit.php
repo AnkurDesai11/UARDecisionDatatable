@@ -2,13 +2,13 @@
 require_once "pdo.php";
 session_start();
 
-if( $_POST['flagtest'] == "ad"){
+if( $_POST['dif'] == "ad"){
     $stmt = $pdo->prepare('UPDATE access_review SET accessdecision=:ad 
                         WHERE manageremail = :em AND 
                             id = :id 
                             ');
                 $stmt->execute(array(
-                    ':ad' => $_POST['accessdecision'],
+                    ':ad' => $_POST['val'],
                     ':id' => $_POST['id'],
                     ':em' => $_SESSION['email']
                     )
@@ -20,7 +20,7 @@ else{
                             id = :id 
                             ');
                 $stmt->execute(array(
-                    ':com' => $_POST['comments'],
+                    ':com' => $_POST['val'],
                     ':id' => $_POST['id'],
                     ':em' => $_SESSION['email']
                     )
