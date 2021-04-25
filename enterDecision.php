@@ -23,18 +23,16 @@ if ( ! isset($_SESSION['email'] ) ) {
 <body>
 
     <div id="datatable" ></div>
-    
+
     <script type="text/javascript">
 
         var idArray = new Array();
 
-    
-    
         var table = new Tabulator("#datatable", {
             height: 500,
             //data: tabledata,
-            placeholder:"No Data Set",
             layout: "fitColumns",
+            placeholder:"No Data Set",
             columns: [
                 
                 {title: "Application Name", field: "applicationname", sorter: "string", width: 150, headerFilter: "input"}, 
@@ -45,6 +43,7 @@ if ( ! isset($_SESSION['email'] ) ) {
                 {title: "Comments",field: "comments",hozAlign: "center",editor: "input",},
                 
             ],
+
             cellEdited: function (cell) {
             // This callback is called any time a cell is edited.
             var datax = cell.getData();
@@ -72,6 +71,9 @@ if ( ! isset($_SESSION['email'] ) ) {
         $(document).ready(function() {
             table.setData("ajaxLoad.php?decision=1");
         });
+
+
+        
 
     <script>
 </body>
