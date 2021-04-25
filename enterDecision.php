@@ -18,19 +18,19 @@ if ( ! isset($_SESSION['email'] ) ) {
     <script type="text/javascript" src="tabulator-master/dist/js/tabulator.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="jquery-3.6.0.min"><\/script>')</script>
-
+    
 </head>
 <body>
 
-    <div id="datatable"></div>
+    <div id="container"></div>
 
     <script type="text/javascript">
 
         var idArray = new Array();
 
-        var table = new Tabulator("#datatable", {
+        var table = new Tabulator("#container", {
             //height: 500,
-            ajaxURL:"ajaxLoad.php?decision=1",
+            //ajaxURL:"ajaxLoad.php?decision=1",
             layout: "fitColumns",
             placeholder:"No Data Set",
             columns: [
@@ -45,21 +45,21 @@ if ( ! isset($_SESSION['email'] ) ) {
             ],
 
             cellEdited: function (cell) {
-            // This callback is called any time a cell is edited.
-            var val = cell.getData();
-            var dif;
-            if( cell.getField() == "accessdecision"){
-                dif = "ad"
-            }
-            else{
-                dif = "com"
-            }
+                // This callback is called any time a cell is edited.
+                var val = cell.getData();
+                var dif;
+                if( cell.getField() == "accessdecision"){
+                    dif = "ad"
+                }
+                else{
+                    dif = "com"
+                }
 
-            $.ajax({
+                $.ajax({
 
-                url: 'ajaxEdit.php',
-                data: { 'dif': dif, 'val': val, 'id': cell.getIndex() },
-                type: 'post'
+                    url: 'ajaxEdit.php',
+                    data: { 'dif': dif, 'val': val, 'id': cell.getIndex() },
+                    type: 'post'
 
                 })
             },
@@ -73,10 +73,14 @@ if ( ! isset($_SESSION['email'] ) ) {
 
         });
 
+        $(document).ready(function() {
+            table.setData("ajaxLoad.php?decision=1");
+        });
 
-    <script>
+    </script>
 </body>
-
-
 </html>
+
+
+
 
