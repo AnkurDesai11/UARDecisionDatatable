@@ -74,7 +74,18 @@ if ( ! isset($_SESSION['email'] ) ) {
         });
 
         $(document).ready(function() {
-            table.setData("ajaxLoad.php?decision=1");
+
+            $.ajax({
+
+                url: 'ajaxLoad.php?decision=1',
+                //data: { 'dif': dif, 'val': val, 'id': cell.getIndex() },
+                type: 'get',
+                success: function(response) {
+                    table.setData(response);
+                }
+                        
+            });
+            
         });
 
     </script>
