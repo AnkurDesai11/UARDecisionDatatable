@@ -38,7 +38,7 @@ foreach ( $rows as $row ){
                     "employeeid" => $employeeid,
                     "employeename" => $employeename,
                     "role" => $role,
-                    "emaiaccessdecisionl" => $accessdecision,
+                    "accessdecision" => $accessdecision,
                     "comments" => $comments,
                 );
 
