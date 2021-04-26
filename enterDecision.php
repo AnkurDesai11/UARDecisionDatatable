@@ -30,7 +30,7 @@ if ( ! isset($_SESSION['email'] ) ) {
 
         var table = new Tabulator("#container", {
             //height: 500,
-            //ajaxURL:"ajaxLoad.php?decision=1",
+            ajaxURL:"ajaxLoad.php?decision=1",
             layout: "fitColumns",
             placeholder:"No Data Set",
             columns: [
@@ -38,8 +38,8 @@ if ( ! isset($_SESSION['email'] ) ) {
                 {title: "Application Name", field: "applicationname", sorter: "string", width: 150, headerFilter: "input"}, 
                 {title: "Employee ID",field: "employeeid",sorter: "string",hozAlign: "left",headerFilter: "input",},
                 {title: "Employee Name",field: "employeename",sorter: "string",hozAlign: "center",}, 
-                {title: "Profile/Access Level/Role",field: "role",sorter: "string",hozAlign: "center",headerFilter: "input",},
-                {title: "Access Decision",field: "accessdecision",hozAlign: "center",editor: "select",editorParams: {"keep": "Keep","revoke": "Revoke","notaware": "Not Aware","delete": "Delete"}},
+                {title: "Profile/Access Level/Role",field: "rolename",sorter: "string",hozAlign: "center",headerFilter: "input",},
+                {title: "Access Decision",field: "accessdecision",hozAlign: "center",editor: "select",editorParams: {"Keep": "Keep","Revoke": "Revoke","Not Aware": "Not Aware","Delete": "Delete"}},
                 {title: "Comments",field: "comments",hozAlign: "center",editor: "input",},
                 
             ],
@@ -49,16 +49,18 @@ if ( ! isset($_SESSION['email'] ) ) {
                 var val = cell.getData();
                 var dif;
                 if( cell.getField() == "accessdecision"){
-                    dif = "ad"
+                    dif = "ad";
+                    val = val['accessdecision'];
                 }
                 else{
-                    dif = "com"
+                    dif = "com";
+                    val = val['comments'];
                 }
 
                 $.ajax({
 
                     url: 'ajaxEdit.php',
-                    data: { 'dif': dif, 'val': val, 'id': cell.getIndex() },
+                    data: { 'dif': dif, 'val': val, 'id': cell.getRow().getIndex() },
                     type: 'post'
 
                 })
@@ -73,20 +75,21 @@ if ( ! isset($_SESSION['email'] ) ) {
 
         });
 
-        $(document).ready(function() {
-
-            $.ajax({
-
-                url: 'ajaxLoad.php?decision=1',
-                //data: { 'dif': dif, 'val': val, 'id': cell.getIndex() },
-                type: 'get',
-                success: function(response) {
-                    table.setData(response);
-                }
-                        
-            });
-            
-        });
+        //$(document).ready(function() {
+        //
+        //    $.ajax({
+        //
+        //        url: 'ajaxLoad.php?decision=1',
+        //        //data: { 'dif': dif, 'val': val, 'id': cell.getIndex() },
+        //        type: 'get',
+        //        success: function(response) {
+        //            console.log(response);
+        //            table.setData(response);
+        //        }
+        //                
+        //    });
+        //    
+        //});
 
     </script>
 </body>
