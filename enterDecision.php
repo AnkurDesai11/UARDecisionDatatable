@@ -24,12 +24,16 @@ if ( ! isset($_SESSION['email'] ) ) {
 
     <div id="container"></div>
 
+    <div style="display:inline-block;">
+        <button id="submit_button" style="margin-left:100px;">Update Decision for all shown Accounts</button>
+    </div>
+
     <script type="text/javascript">
 
         var idArray = new Array();
 
         var table = new Tabulator("#container", {
-            //height: 500,
+            height: 800,
             ajaxURL:"ajaxLoad.php?decision=1",
             layout: "fitColumns",
             placeholder:"No Data Set",
@@ -66,15 +70,18 @@ if ( ! isset($_SESSION['email'] ) ) {
                 })
             },
 
-            dataFiltered:function(filters, rows){
-                //filters - array of filters currently applied
-                //rows - array of row components that pass the filters
-                idArray = new Array();
-                idArray = rows.map(i => i.id);
-            },
+            //dataFiltered:function(filters, rows){
+            //    //filters - array of filters currently applied
+            //    //rows - array of row components that pass the filters
+            //    idArray = new Array();
+            //    idArray = rows.map(i => i.id);
+            //},
 
         });
 
+        document.getElementById("submit_button").addEventListener("click", function(){
+            
+        });
         //$(document).ready(function() {
         //
         //    $.ajax({
