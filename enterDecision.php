@@ -24,13 +24,13 @@ if ( ! isset($_SESSION['email'] ) ) {
     <h1> Enter your Decisions for User Access Review here </h1>
     <p> Please enter your decision and comments if necessary for the accounts of users assigned to you for the review
         Refresh the page periodically to ensure that updated decisions are recorded, if they are successfully updated, they will not be accessible below and will have to be modified from the Edit Decisions Page
-    </p> <br />
-    <a href="enterDecision.php">Refresh Page</a> 
-    <br />
-    <a href="editDecision.php">Edit Decisions</a> 
-    <br />
+    </p> 
+    <div style="display:inline-block;" >
+        <a href="enterDecision.php">Refresh Page</a> 
+        <a href="editDecision.php" style="margin-left:75px;">Edit Decisions</a> 
+    </div>
     <!--<a href="home.php">Home Page</a> <br />-->
-    <div id="container" style="margin-top: 50px;"></div>
+    <div id="container" style="margin-top: 20px; max-height:360px; overflow:auto;"></div>
     
     <div style="display:inline-block;  margin-top:20px; width:auto;">
         Access Decision: 
@@ -51,7 +51,7 @@ if ( ! isset($_SESSION['email'] ) ) {
         //var idArray = new Array();
 
         var table = new Tabulator("#container", {
-            //height: 800,
+            //maxHeight:"100%",
             ajaxURL:"ajaxLoad.php?decision=1",
             layout: "fitColumns",
             placeholder:"Great! No items left for review",
@@ -104,13 +104,14 @@ if ( ! isset($_SESSION['email'] ) ) {
             }
             else{
                 var filteredIds = new Array();
-                var filteredIds = table.getData(true).map(i => i.id);
+                var filteredIds = table.getData('active').map(i => i.id);
                 var decision = $("#multi_decision").val();
                 var comments = $("#multi_comments").val();
+                console.log(filteredIds);
                 $.ajax({
 
                         url: 'ajaxMultiEdit.php',
-                        data: { 'idarray': filteredIds, 'accessdecision': decision, 'comment' : comments },
+                        data: { 'idarray': filteredIds, 'accessdecision': decision, 'comments' : comments },
                         type: 'post'
 
                         });
