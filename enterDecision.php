@@ -21,22 +21,40 @@ if ( ! isset($_SESSION['email'] ) ) {
     
 </head>
 <body>
-
-    <div id="container"></div>
-
-    <div style="display:inline-block;">
-        <button id="submit_button" style="margin-left:100px;">Update Decision for all shown Accounts</button>
+    <h1> Enter your Decisions for User Access Review here </h1>
+    <p> Please enter your decision and comments if necessary for the accounts of users assigned to you for the review
+        Refresh the page periodically to ensure that updated decisions are recorded, if they are successfully updated, they will not be accessible below and will have to be modified from the Edit Decisions Page
+    </p> <br />
+    <a href="enterDecision.php">Refresh Page</a> 
+    <br />
+    <a href="editDecision.php">Edit Decisions</a> 
+    <br />
+    <!--<a href="home.php">Home Page</a> <br />-->
+    <div id="container" style="margin-top: 50px;"></div>
+    
+    <div style="display:inline-block;  margin-top:20px; width:auto;">
+        Access Decision: 
+        <select id="multi_decision">
+            <option value="" selected="selected" hidden="hidden">Enter Decision</option>
+            <option value="Keep">Keep</option>
+            <option value="Revoke">Revoke</option>
+            <option value="Delete">Delete</option>
+            <option value="Not Aware">Not Aware</option>
+        </select>
+        <button id="submit_button" style="margin-left:75px;">Update for all shown Accounts</button>
+        <div id="message" ></div>
     </div>
-
+    <p>Comment:
+        <input id="multi_comments" type="text" size="80" placeholder="Enter Comment"></p>
     <script type="text/javascript">
 
-        var idArray = new Array();
+        //var idArray = new Array();
 
         var table = new Tabulator("#container", {
-            height: 800,
+            //height: 800,
             ajaxURL:"ajaxLoad.php?decision=1",
             layout: "fitColumns",
-            placeholder:"No Data Set",
+            placeholder:"Great! No items left for review",
             columns: [
                 
                 {title: "Application Name", field: "applicationname", sorter: "string", width: 150, headerFilter: "input"}, 
@@ -70,17 +88,45 @@ if ( ! isset($_SESSION['email'] ) ) {
                 })
             },
 
-            //dataFiltered:function(filters, rows){
-            //    //filters - array of filters currently applied
-            //    //rows - array of row components that pass the filters
-            //    idArray = new Array();
-            //    idArray = rows.map(i => i.id);
-            //},
-
         });
 
-        document.getElementById("submit_button").addEventListener("click", function(){
-            
+        $("#submit_button").click(function(){
+
+            if( $("#multi_decision").val()=='' ){
+                $('#message').css({ 'color': 'red',
+                                    'display' : 'inline-block',
+                                    'margin-left' : '75px',
+                                    'width' : 'auto'});
+                $('#message').text("Decision is required");
+                $('#message').fadeIn('slow', function(){
+                    $('#message').delay(2000).fadeOut(); 
+                });
+            }
+            else{
+                var filteredIds = new Array();
+                var filteredIds = table.getData(true).map(i => i.id);
+                var decision = $("#multi_decision").val();
+                var comments = $("#multi_comments").val();
+                $.ajax({
+
+                        url: 'ajaxMultiEdit.php',
+                        data: { 'idarray': filteredIds, 'accessdecision': decision, 'comment' : comments },
+                        type: 'post'
+
+                        });
+                $("#multi_decision").val('');
+                $("#multi_comments").val('');
+
+                $('#message').css({ 'color': 'green',
+                                    'display' : 'inline-block',
+                                    'margin-left' : '75px',
+                                    'width' : 'auto'});
+                $('#message').text("Decisions updated");
+                $('#message').fadeIn('slow', function(){
+                    $('#message').delay(2000).fadeOut(); 
+                });
+            }
+
         });
         //$(document).ready(function() {
         //

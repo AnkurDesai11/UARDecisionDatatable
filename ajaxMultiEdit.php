@@ -4,7 +4,7 @@ session_start();
 
 $stmt = $pdo->prepare('UPDATE access_review SET accessdecision=:ad, comments=:com 
                         WHERE accessdecision IS NOT NULL AND
-                            id IN (' . implode(',', array_map('intval', $array)) . ') 
+                            id IN (' . implode(',', array_map('intval', $_POST['idarray'])) . ') 
                             ');
                 $stmt->execute(array(
                     ':ad' => $_POST['accessdecision'],
