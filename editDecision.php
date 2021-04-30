@@ -22,14 +22,14 @@ if ( ! isset($_SESSION['email'] ) ) {
 </head>
 <body>
 
-    <h1> Enter your Decisions for User Access Review here </h1>
-    <p> Please enter your decision and comments if necessary for the accounts of users assigned to you for the review
-        Refresh the page periodically to ensure that updated decisions are recorded, if they are successfully updated, they will not be accessible below and will have to be modified from the Edit Decisions Page
+    <h1> Edit your Decisions for User Access Review here </h1>
+    <p> Please edit your previously entered decision and comments if necessary for the accounts of users assigned to you for the review
+        Refresh the page periodically to ensure that updated decisions are recorded
     </p> 
     <div style="display:inline-block;" >
         <a href='logout.php' >Logout</a>
-        <a href="enterDecision.php" style="margin-left:50px;">Refresh Page</a> 
-        <a href="editDecision.php" style="margin-left:50px;">Edit Decisions</a>
+        <a href="editDecision.php" style="margin-left:50px;">Refresh Page</a> 
+        <a href="enterDecision.php" style="margin-left:50px;">Enter Decisions</a>
         <div style="margin-left:75px;display:inline-block;">Single Update Status: </div>
         <div id="single_message" ></div> 
     </div>
@@ -57,9 +57,9 @@ if ( ! isset($_SESSION['email'] ) ) {
 
         var table = new Tabulator("#container", {
             //maxHeight:"100%",
-            ajaxURL:"ajaxLoad.php?decision=1",
+            ajaxURL:"ajaxLoad.php?decision=2",
             layout: "fitColumns",
-            placeholder:"Great! No items left for review",
+            placeholder:"Please enter decisions and comments before you can edit them",
             columns: [
                 
                 {title: "Application Name", field: "applicationname", sorter: "string", width: 150, headerFilter: "input"}, 

@@ -22,29 +22,6 @@ else{
 
 }
 
-//$result = array();
-//
-//foreach ( $rows as $row ){
-//
-//   $id = $row['id'];
-//    $applicationname = $row['applicationname'];
-//    $employeeid = $row['employeeid'];
-//    $employeename = $row['employeename'];
-//    $role = $row['role'];
-//    $accessdecision = $row['accessdecision'];
-//    $comments = $row['comments'];
-//
-//    $result[] = array(
-//                    "id" => $id,
-//                    "applicationname" => $applicationname,
-//                    "employeeid" => $employeeid,
-//                    "employeename" => $employeename,
-//                    "role" => $role,
-//                    "accessdecision" => $accessdecision,
-//                    "comments" => $comments,
-//                );
-//
-//}
 
 //console.log(json_encode($rows, JSON_NUMERIC_CHECK));
 echo json_encode($rows, JSON_NUMERIC_CHECK);

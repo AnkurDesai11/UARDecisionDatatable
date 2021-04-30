@@ -63,31 +63,7 @@ if ( isset($_POST['email']) && isset($_POST['pass']) ) {
 <label for="id_1723">Password</label>
 <input type="password" size="40" name="pass" id="id_1723"><br>
 <p><input type="submit", value="Log In"/> 
-<!--<a href="<?php //echo($_SERVER['PHP_SELF']);?>">Refresh</a>
-<a href="index.php">Start Page</a></p>-->
 </form>
-<!--<script>
-function doValidate() {
-    console.log('Validating...');
-    try {
-        addr = document.getElementById('email').value;
-        pw = document.getElementById('id_1723').value;
-        console.log("Validating addr = "+ addr +" pw = "+pw);
-        if (addr == null || addr == "" || pw == null || pw == "") {
-            alert("Both fields must be filled out");
-            return false;
-        }
-        if( addr.indexOf('@') == -1 ){
-            alert("Invalid Email address-No @ sign");
-            return false;
-        }
-        return true;
-    } catch(e) {
-        return false;
-    }
-    return false;
-}
-</script>-->
 </div>
 </body>
 </html>
