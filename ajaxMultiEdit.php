@@ -11,5 +11,9 @@ $stmt = $pdo->prepare('UPDATE access_review SET accessdecision=:ad, comments=:co
                     ':com' => $_POST['comments'],
                     )
                 );
+                $count = $stmt->rowCount();
+
+echo ("Decision and comments updated for ".$count." Records");
+
 
 ?>
